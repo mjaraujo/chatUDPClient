@@ -13,11 +13,11 @@ import com.mjasistemas.chatclientudp.model.pessoa.Moderador;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
 import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author marcio
  */
 public class Solicitacoes {
@@ -26,22 +26,23 @@ public class Solicitacoes {
 
     public Solicitacoes() {
         udpc = new UDPCliente(Configuracoes.getIP(), Configuracoes.getPorta());
+        udpc.run();
     }
 
     public Pessoa solicitarLogin(String username, String senha) {
-        Pessoa p = null;
         String msg = "00";
         msg += String.format("%12s", username);
         msg += String.format("%20s", senha);
 
         udpc.enviar(msg);
-        udpc.run();
 
+        Pessoa p = null;
         do {
             if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
 
                 switch (udpc.getRetornoSolicitacao()) {
                     case LOGIN_OK: //login sucesso
+
                         int id = Integer.parseInt(udpc.getStrRetorno().substring(3, 8));
                         String usuario = udpc.getStrRetorno().substring(9, 20).trim();
                         int tipo = Integer.parseInt(udpc.getStrRetorno().substring(20, 21));
@@ -61,9 +62,11 @@ public class Solicitacoes {
                         p.setSenha(senha);
                         return p;
                     case LOGIN_ERRO_RG:
+                        p = new Usuario();
                         p.setId(-1);
                         return p;
                     case LOGIN_ERRO_SENHA:
+                        p = new Usuario();
                         p.setId(-2);
                         return p;
                 }
@@ -101,10 +104,10 @@ public class Solicitacoes {
                         }
                         break;
                     case LOGIN_ERRO_RG:
-                        
+
                         break;
                     case LOGIN_ERRO_SENHA:
-                        
+
                         break;
                 }
 
