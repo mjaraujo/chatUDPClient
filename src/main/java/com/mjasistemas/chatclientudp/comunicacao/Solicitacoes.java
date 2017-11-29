@@ -8,7 +8,13 @@ package com.mjasistemas.chatclientudp.comunicacao;
 import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.Sala;
 import com.mjasistemas.chatclientudp.model.StatusSolicitacaoEnum;
+import com.mjasistemas.chatclientudp.model.pessoa.Administrador;
+import com.mjasistemas.chatclientudp.model.pessoa.Moderador;
+import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
+import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,7 +22,98 @@ import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
  */
 public class Solicitacoes {
 
-    UDPCliente udpc = new UDPCliente(Configuracoes.getIP(), Configuracoes.getPorta());
+    UDPCliente udpc;
+
+    public Solicitacoes() {
+        udpc = new UDPCliente(Configuracoes.getIP(), Configuracoes.getPorta());
+    }
+
+    public Pessoa solicitarLogin(String username, String senha) {
+        Pessoa p = null;
+        String msg = "00";
+        msg += String.format("%12s", username);
+        msg += String.format("%20s", senha);
+
+        udpc.enviar(msg);
+        udpc.run();
+
+        do {
+            if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
+
+                switch (udpc.getRetornoSolicitacao()) {
+                    case LOGIN_OK: //login sucesso
+                        int id = Integer.parseInt(udpc.getStrRetorno().substring(2, 6));
+                        String usuario = udpc.getStrRetorno().substring(7, 18).trim();
+                        int tipo = Integer.parseInt(udpc.getStrRetorno().substring(19, 19));
+                        switch (tipo) {
+                            case 0:
+                                p = new Administrador();
+                                break;
+                            case 1:
+                                p = new Moderador();
+                                break;
+                            case 2:
+                                p = new Usuario();
+                                break;
+                        }
+                        p.setId(id);
+                        p.setNickName(username);
+                        p.setSenha(senha);
+                        p.setTipo(TipoPessoaEnum.USUARIO);
+                        break;
+                    case LOGIN_ERRO_RG:
+                        p.setId(-1);
+                        break;
+                    case LOGIN_ERRO_SENHA:
+                        p.setId(-2);
+                        break;
+                }
+
+            }
+
+        } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
+
+        return p;
+
+    }
+
+    public List<Sala> solicitarSalasAberas(String username) {
+        String msg = "01";
+        msg += String.format("%12s", username);
+
+        udpc.enviar(msg);
+        udpc.run();
+
+        do {
+            if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
+
+                switch (udpc.getRetornoSolicitacao()) {
+                    case LISTAR_SALAS_OK: //login sucesso
+                        Integer.parseInt(udpc.getStrRetorno().substring(3, 4));
+                        String usuario = udpc.getStrRetorno().substring(7, 18).trim();
+                        int tipo = Integer.parseInt(udpc.getStrRetorno().substring(19, 19));
+                        switch (tipo) {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                        }
+                        break;
+                    case LOGIN_ERRO_RG:
+                        break;
+                    case LOGIN_ERRO_SENHA:
+                        break;
+                }
+
+            }
+
+        } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
+
+        return new ArrayList<>();
+
+    }
 
     public RetornoEnum solicitarEntrada(String usuario, Integer sala) {
         boolean ret = false;

@@ -19,6 +19,7 @@ public class UDPCliente implements Runnable {
     private RetornoEnum retornoSolicitacao;
     private final String ip;
     private final int servidorPorta;
+    private String strRetorno;
     private DatagramSocket aSoquete;
 
     public UDPCliente(String ip, int servidorPorta) {
@@ -35,6 +36,7 @@ public class UDPCliente implements Runnable {
 
         try {
             statusSolicitacao = StatusSolicitacaoEnum.PROCESSANDO;
+            strRetorno = "";
             byte[] m = mensagem.getBytes();
             InetAddress aHost = InetAddress.getByName(/*args[1]*/ip);
             DatagramPacket requisicao = new DatagramPacket(m, mensagem.length(), aHost, servidorPorta);
@@ -51,11 +53,12 @@ public class UDPCliente implements Runnable {
     }
 
     private void tratarResposta(String resp) {
-        String sResp = resp.substring(0, 1);
+        String sResp = resp.substring(0, 2);
         String ret;
         switch (sResp) {
-            case "1": //resposta solicitação entrar na sala
-                 ret = resp.substring(13, 14);
+            case "00": //resposta solicitação login no sistema
+                ret = resp.substring(20, 20);
+                strRetorno = resp;
                 switch (ret) {
                     case "0":
                         retornoSolicitacao = RetornoEnum.ENTRADA_OK;
@@ -68,6 +71,37 @@ public class UDPCliente implements Runnable {
                         break;
                 }
                 break;
+            case "01": //resposta solicitação listar salas
+                ret = resp.substring(2, 3);
+                strRetorno = resp;
+                switch (ret) {
+                    case "0":
+                        retornoSolicitacao = RetornoEnum.LISTAR_SALAS_OK;
+                        break;
+                    case "1":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_NAO_CADASTRADO;
+                        break;
+                    case "2":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_BANIDO;
+                        break;
+                }
+                break;
+            case "02": //resposta solicitação entrar na sala
+                ret = resp.substring(13, 14);
+                strRetorno = resp;
+                switch (ret) {
+                    case "0":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_OK;
+                        break;
+                    case "1":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_NAO_CADASTRADO;
+                        break;
+                    case "2":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_BANIDO;
+                        break;
+                }
+                break;
+
             case "0":
                 ret = resp.substring(1, 2);
                 if (ret == "0") {
@@ -147,6 +181,20 @@ public class UDPCliente implements Runnable {
      */
     public void setRetornoSolicitacao(RetornoEnum retornoSolicitacao) {
         this.retornoSolicitacao = retornoSolicitacao;
+    }
+
+    /**
+     * @return the strRetorno
+     */
+    public String getStrRetorno() {
+        return strRetorno;
+    }
+
+    /**
+     * @param strRetorno the strRetorno to set
+     */
+    public void setStrRetorno(String strRetorno) {
+        this.strRetorno = strRetorno;
     }
 
 }

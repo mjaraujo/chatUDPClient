@@ -24,8 +24,7 @@ public class JanelaPrincipalForm extends javax.swing.JFrame {
         this.pessoa = pessoa;
         initComponents();
         habilitarOpcoes();
-        Configuracoes.setPorta(9876);
-        Configuracoes.setIP("127.0.0.1");
+        
     }
 
     /**
@@ -41,7 +40,6 @@ public class JanelaPrincipalForm extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         mnuSalasAbertas = new javax.swing.JMenuItem();
-        mnuGerenciar = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -66,15 +64,6 @@ public class JanelaPrincipalForm extends javax.swing.JFrame {
             }
         });
         fileMenu.add(mnuSalasAbertas);
-
-        mnuGerenciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
-        mnuGerenciar.setText("Gerenciar");
-        mnuGerenciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuGerenciarActionPerformed(evt);
-            }
-        });
-        fileMenu.add(mnuGerenciar);
 
         menuBar.add(fileMenu);
 
@@ -156,12 +145,6 @@ public class JanelaPrincipalForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mnuSalasAbertasActionPerformed
 
-    private void mnuGerenciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGerenciarActionPerformed
-        GerenciarSessoesForm gerenciarSessoesForm = new GerenciarSessoesForm(this,pessoa);
-        gerenciarSessoesForm.setVisible(true);
-        desktopPane.add(gerenciarSessoesForm);
-    }//GEN-LAST:event_mnuGerenciarActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
@@ -178,7 +161,6 @@ public class JanelaPrincipalForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
    private void habilitarOpcoes() {
-        mnuGerenciar.setEnabled(pessoa.getTipo()==TipoPessoaEnum.ADMINISTRADOR);
        // mnuSalasAbertas.setEnabled(usuario.getTipo()==TipoPessoaEnum.ADMINISTRADOR);
         
     }
@@ -195,7 +177,6 @@ public class JanelaPrincipalForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem mnuGerenciar;
     private javax.swing.JMenu mnuSair;
     private javax.swing.JMenuItem mnuSalasAbertas;
     // End of variables declaration//GEN-END:variables

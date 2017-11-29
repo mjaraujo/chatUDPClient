@@ -5,7 +5,9 @@
  */
 package com.mjasistemas.chatclientudp.view;
 
-import com.mjasistemas.chatclientudp.dao.Pessoa.PessoaDao;
+import com.mjasistemas.chatclientudp.comunicacao.Solicitacoes;
+import com.mjasistemas.chatclientudp.comunicacao.UDPCliente;
+import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Administrador;
 import com.mjasistemas.chatclientudp.model.pessoa.Moderador;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
@@ -21,13 +23,11 @@ import javax.swing.JOptionPane;
  */
 public class LoginForm extends javax.swing.JFrame {
 
-    private Pessoa pessoa;
 
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
-        pessoa = new Usuario();
         initComponents();
 
     }
@@ -119,49 +119,24 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        Pessoa p = new PessoaDao().getByNickName(txtUsuario.getText());
-        if (String.copyValueOf(txtSenha.getPassword()).equals(p.getSenha())) {
-            JOptionPane.showMessageDialog(null, "Bem vindo " + p.getTipo() + " " + p.getNome());
-            switch (p.getTipo()) {
-                case ADMINISTRADOR:
-                    this.pessoa = (Administrador) p;
-                    break;
 
-                case MODERADOR:
-                    this.pessoa = (Moderador) p;
-                    break;
-                case USUARIO:
-                    this.pessoa = (Usuario) p;
-                    break;
-            }
-            this.setVisible(false);
-            new JanelaPrincipalForm(p).setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Senha inválida!");
+        Pessoa pessoaLogin = new Solicitacoes().solicitarLogin(txtUsuario.getText(), txtSenha.getText());
+        
+        
+        switch (pessoaLogin.getId()) {
+            case -1:
+                JOptionPane.showMessageDialog(this, "Usuario não cadastrado");
+                break;
+            case -2:
+                JOptionPane.showMessageDialog(this, "Senha inválida");
+                break;
         }
-
+        this.setVisible(false);
+        new JanelaPrincipalForm(pessoaLogin).setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    /**
-     * @return the pessoa
-     */
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    /**
-     * @param pessoa the pessoa to set
-     */
-    public void setPessoa(Pessoa pessoa) {
-        pessoa = new Usuario();
-        this.pessoa = pessoa;
-    }
-
-    public List<TipoPessoaEnum> getTipos() {
-        return Arrays.asList(TipoPessoaEnum.values());
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEntrar;

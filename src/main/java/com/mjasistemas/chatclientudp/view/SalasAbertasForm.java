@@ -7,11 +7,9 @@ package com.mjasistemas.chatclientudp.view;
 
 import com.mjasistemas.chatclientudp.comunicacao.Solicitacoes;
 import com.mjasistemas.chatclientudp.comunicacao.UDPCliente;
-import com.mjasistemas.chatclientudp.dao.Pessoa.SalaDao;
 import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.Sala;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
@@ -30,11 +28,12 @@ public class SalasAbertasForm extends javax.swing.JInternalFrame {
      * Creates new form SalasAbertasForm
      */
     public SalasAbertasForm(Pessoa pessoa) {
-        this.salas = ObservableCollections.observableList(new SalaDao().getAllAbertas());
+//        this.salas = ObservableCollections.observableList(new SalaDao().getAllAbertas());
         this.pessoa = pessoa;
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,6 +167,10 @@ public class SalasAbertasForm extends javax.swing.JInternalFrame {
      */
     public void setSalaSelecionada(Sala salaSelecionada) {
         this.salaSelecionada = salaSelecionada;
+    }
+
+    private void iniciar() {
+        
     }
 
 }

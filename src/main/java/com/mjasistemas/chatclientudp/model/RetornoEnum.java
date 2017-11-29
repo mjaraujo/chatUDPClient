@@ -14,8 +14,12 @@ public enum RetornoEnum {
     ENTRADA_OK("Entrada permitida"),
     ENTRADA_BANIDO("Usuário banido da sala"),
     ENTRADA_NAO_CADASTRADO("Usuário não cadastrado"),
-    ERRO_SIZE("Tamanho da mensagem incorreto");
-
+    ERRO_SIZE("Tamanho da mensagem incorreto"),
+    LOGIN_ERRO_RG("Usuario não registrado"),
+    LOGIN_ERRO_SENHA("Senha inválida"),
+    LOGIN_OK("Login com sucesso"),
+    LISTAR_SALAS_OK("Salas listadas com sucesso");
+    
     private final String descricao;
 
     private RetornoEnum(String descricao) {
