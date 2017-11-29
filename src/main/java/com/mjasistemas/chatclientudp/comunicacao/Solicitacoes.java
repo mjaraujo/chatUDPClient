@@ -42,9 +42,9 @@ public class Solicitacoes {
 
                 switch (udpc.getRetornoSolicitacao()) {
                     case LOGIN_OK: //login sucesso
-                        int id = Integer.parseInt(udpc.getStrRetorno().substring(2, 6));
-                        String usuario = udpc.getStrRetorno().substring(7, 18).trim();
-                        int tipo = Integer.parseInt(udpc.getStrRetorno().substring(19, 19));
+                        int id = Integer.parseInt(udpc.getStrRetorno().substring(3, 8));
+                        String usuario = udpc.getStrRetorno().substring(9, 20).trim();
+                        int tipo = Integer.parseInt(udpc.getStrRetorno().substring(20, 21));
                         switch (tipo) {
                             case 0:
                                 p = new Administrador();
@@ -59,14 +59,13 @@ public class Solicitacoes {
                         p.setId(id);
                         p.setNickName(username);
                         p.setSenha(senha);
-                        p.setTipo(TipoPessoaEnum.USUARIO);
-                        break;
+                        return p;
                     case LOGIN_ERRO_RG:
                         p.setId(-1);
-                        break;
+                        return p;
                     case LOGIN_ERRO_SENHA:
                         p.setId(-2);
-                        break;
+                        return p;
                 }
 
             }
@@ -102,8 +101,10 @@ public class Solicitacoes {
                         }
                         break;
                     case LOGIN_ERRO_RG:
+                        
                         break;
                     case LOGIN_ERRO_SENHA:
+                        
                         break;
                 }
 

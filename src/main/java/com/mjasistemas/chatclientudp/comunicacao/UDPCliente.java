@@ -57,17 +57,17 @@ public class UDPCliente implements Runnable {
         String ret;
         switch (sResp) {
             case "00": //resposta solicitação login no sistema
-                ret = resp.substring(20, 20);
+                 ret = resp.substring(2, 3); // pega a ultima posição para fazer a verificação conforme protocolo
                 strRetorno = resp;
                 switch (ret) {
                     case "0":
-                        retornoSolicitacao = RetornoEnum.ENTRADA_OK;
+                        retornoSolicitacao = RetornoEnum.LOGIN_OK;
                         break;
                     case "1":
-                        retornoSolicitacao = RetornoEnum.ENTRADA_NAO_CADASTRADO;
+                        retornoSolicitacao = RetornoEnum.LOGIN_ERRO_RG;
                         break;
                     case "2":
-                        retornoSolicitacao = RetornoEnum.ENTRADA_BANIDO;
+                        retornoSolicitacao = RetornoEnum.LOGIN_ERRO_SENHA;
                         break;
                 }
                 break;
@@ -121,8 +121,8 @@ public class UDPCliente implements Runnable {
             try {
                 escutando = true;
                 aSoquete.receive(resposta);
-                String resp = new String(resposta.getData());
-                System.out.println("Resposta ouvida pelo client: " + resp);
+                String resp = new String(resposta.getData()).trim();
+                System.out.println("Resposta ouvida pelo cliente: " + resp);
                 tratarResposta(resp);
                 if (statusSolicitacao == StatusSolicitacaoEnum.RESPONDIDA) {
                     break;
