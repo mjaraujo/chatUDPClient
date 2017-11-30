@@ -129,7 +129,7 @@ public class SalasAbertasForm extends javax.swing.JInternalFrame {
             resSolicitarEntrada = new Solicitacoes().solicitarEntrada(pessoa.getNickName(), salaSelecionada.getId());
 
             if (resSolicitarEntrada == RetornoEnum.ENTRADA_OK) {
-                new ChatForm().setVisible(true);
+                new ChatForm(salaSelecionada,pessoa).setVisible(true);
             } else if (resSolicitarEntrada == RetornoEnum.ENTRADA_BANIDO) {
                 JOptionPane.showMessageDialog(this, "Você está banido dessa sala");
 

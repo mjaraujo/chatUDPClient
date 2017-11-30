@@ -92,7 +92,7 @@ public class Solicitacoes {
                 switch (udpc.getRetornoSolicitacao()) {
                     case LISTAR_SALAS_OK: //login sucesso
                         int numSalas = Integer.parseInt(udpc.getStrRetorno().substring(3, 5));
-                        for (int i = 0; i < numSalas-1; i++) {
+                        for (int i = 0; i < numSalas - 1; i++) {
                             Sala s = new Sala();
                             int id = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 5).trim());
                             j += 5;
@@ -119,7 +119,7 @@ public class Solicitacoes {
 
     public RetornoEnum solicitarEntrada(String usuario, Integer sala) {
         boolean ret = false;
-        String msg = "1";
+        String msg = "02";
         msg += String.format("%05d", sala); //numeros estranhos complete do lado esquedo com mais coisas
         msg += String.format("%12s", usuario);
 
@@ -133,5 +133,36 @@ public class Solicitacoes {
         } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
 
         return RetornoEnum.ENTRADA_NAO_CADASTRADO;
+    }
+
+    public List<Pessoa> solicitarLogadosSala(String usuario, Integer sala) {
+        List<Pessoa> ret = new ArrayList<>();
+        String msg = "03";
+        msg += String.format("%12s", usuario);
+        msg += String.format("%05d", sala); //numeros estranhos complete do lado esquedo com mais coisas
+
+        udpc.enviar(msg);
+        udpc.run();
+
+        do {
+            int j = 5;
+            if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
+                int numPessoas = Integer.parseInt(udpc.getStrRetorno().substring(3, 5));
+                for (int i = 0; i < numPessoas; i++) {
+                    int id = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 5));
+                    j += 5;
+                    String nick = udpc.getStrRetorno().substring(j, j + 12);
+                    j += 12;
+                    Pessoa p = new Usuario();
+                    p.setId(id);
+                    p.setNickName(nick);
+                    ret.add(p);
+
+                }
+                return ret;
+            }
+        } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
+
+        return ret;
     }
 }

@@ -99,7 +99,22 @@ public class UDPCliente implements Runnable {
                 }
                 break;
             case "02": //resposta solicitação entrar na sala
-                ret = resp.substring(13, 14);
+                ret = resp.substring(2, 3);
+                strRetorno = resp;
+                switch (ret) {
+                    case "0":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_OK;
+                        break;
+                    case "1":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_NAO_CADASTRADO;
+                        break;
+                    case "2":
+                        retornoSolicitacao = RetornoEnum.ENTRADA_BANIDO;
+                        break;
+                }
+                break;
+            case "03": //resposta solicitação listaLogados
+                ret = resp.substring(2, 3);
                 strRetorno = resp;
                 switch (ret) {
                     case "0":
