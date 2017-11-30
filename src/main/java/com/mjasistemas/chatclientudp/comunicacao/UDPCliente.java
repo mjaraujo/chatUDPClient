@@ -138,7 +138,7 @@ public class UDPCliente implements Runnable {
                 }
                 escutando = true;
                 aSoquete.receive(resposta);
-                String resp = new String(resposta.getData()).trim();
+                String resp = new String(resposta.getData());
                 System.out.println("Resposta ouvida pelo cliente: " + resp);
                 tratarResposta(resp);
                 if (statusSolicitacao == StatusSolicitacaoEnum.RESPONDIDA) {

@@ -31,9 +31,10 @@ public class SalasAbertasForm extends javax.swing.JInternalFrame {
      * Creates new form SalasAbertasForm
      */
     public SalasAbertasForm(Pessoa pessoa) {
-        this.salas = ObservableCollections.observableList(new Solicitacoes().solicitarSalasAberas(pessoa.getNickName()));
+        this.salas = ObservableCollections.observableList(new ArrayList<>());
         this.pessoa = pessoa;
         initComponents();
+        this.salas.addAll(new Solicitacoes().solicitarSalasAberas(pessoa.getNickName()));
 
 
     }

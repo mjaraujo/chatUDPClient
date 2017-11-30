@@ -88,22 +88,21 @@ public class Solicitacoes {
 
         do {
             if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
-                int j = 4;
-                udpc.setStrRetorno(udpc.getStrRetorno() + " ");
+                int j = 5;
                 switch (udpc.getRetornoSolicitacao()) {
                     case LISTAR_SALAS_OK: //login sucesso
-                        int numSalas = Integer.parseInt(udpc.getStrRetorno().substring(2, 4));
-                        for (int i = 0; i < numSalas; i++) {
+                        int numSalas = Integer.parseInt(udpc.getStrRetorno().substring(3, 5));
+                        for (int i = 0; i < numSalas-1; i++) {
                             Sala s = new Sala();
                             int id = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 5).trim());
                             j += 5;
                             s.setId(id);
-                            String nome = udpc.getStrRetorno().substring(j, j + 100).trim();
-                            j += 100;
+                            String nome = udpc.getStrRetorno().substring(j, j + 40).trim();
+                            j += 40;
                             s.setNome(nome);
-                            int capacidade = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 5).trim());
-                            j += 5;
-                            s.setId(capacidade);
+                            int capacidade = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 3).trim());
+                            j += 3;
+                            s.setCapacidade(capacidade);
                             lstSalas.add(s);
                         }
                         break;

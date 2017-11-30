@@ -30,20 +30,32 @@
       <file leaf-file-name="SalasAbertasForm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/SalasAbertasForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75">
-              <caret line="33" column="93" lean-forward="false" selection-start-line="33" selection-start-column="93" selection-end-line="33" selection-end-column="93" />
+            <state relative-caret-position="285">
+              <caret line="36" column="73" lean-forward="true" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
               <folding>
-                <element signature="e#3666#3667#0" expanded="true" />
-                <element signature="e#3727#3728#0" expanded="true" />
-                <marker date="1512013945788" expanded="false" signature="6814:6825" ph=" { " />
-                <marker date="1512013945788" expanded="false" signature="6838:6844" ph=" }" />
-                <marker date="1512013945788" expanded="false" signature="6951:6962" ph=" { " />
-                <marker date="1512013945788" expanded="false" signature="6981:6987" ph=" }" />
-                <marker date="1512013945788" expanded="false" signature="7076:7087" ph=" { " />
-                <marker date="1512013945788" expanded="false" signature="7110:7116" ph=" }" />
-                <marker date="1512013945788" expanded="false" signature="7247:7258" ph=" { " />
-                <marker date="1512013945788" expanded="false" signature="7297:7303" ph=" }" />
+                <element signature="e#3712#3713#0" expanded="true" />
+                <element signature="e#3773#3774#0" expanded="true" />
+                <marker date="1512047145533" expanded="false" signature="1460:1490" ph="/unchecked/" />
+                <marker date="1512047145533" expanded="false" signature="1495:5531" ph="Generated Code" />
+                <marker date="1512047145533" expanded="false" signature="6860:6871" ph=" { " />
+                <marker date="1512047145533" expanded="false" signature="6884:6890" ph=" }" />
+                <marker date="1512047145533" expanded="false" signature="6997:7008" ph=" { " />
+                <marker date="1512047145533" expanded="false" signature="7027:7033" ph=" }" />
+                <marker date="1512047145533" expanded="false" signature="7122:7133" ph=" { " />
+                <marker date="1512047145533" expanded="false" signature="7156:7162" ph=" }" />
+                <marker date="1512047145533" expanded="false" signature="7293:7304" ph=" { " />
+                <marker date="1512047145533" expanded="false" signature="7343:7349" ph=" }" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JanelaPrincipalForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/JanelaPrincipalForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,8 +63,28 @@
       <file leaf-file-name="Solicitacoes.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/Solicitacoes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+            <state relative-caret-position="87">
+              <caret line="98" column="40" lean-forward="true" selection-start-line="98" selection-start-column="40" selection-end-line="98" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NumberFormatException.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/jdk/jdk1.8.0_144/src.zip!/java/lang/NumberFormatException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Integer.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/jdk/jdk1.8.0_144/src.zip!/java/lang/Integer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="117">
+              <caret line="614" column="0" lean-forward="false" selection-start-line="614" selection-start-column="0" selection-end-line="614" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -61,10 +93,11 @@
       <file leaf-file-name="UDPCliente.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/UDPCliente.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+            <state relative-caret-position="462">
+              <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
               <folding>
-                <element signature="e#6414#6415#0" expanded="true" />
+                <element signature="e#6374#6375#0" expanded="true" />
+                <element signature="e#6407#6408#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,9 +132,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/LoginForm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/SalasAbertasForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/UDPCliente.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/Solicitacoes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/SalasAbertasForm.java" />
       </list>
     </option>
   </component>
@@ -329,6 +362,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1365" y="0" width="1362" height="768" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -338,19 +372,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298351" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298351" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298351" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3988006" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3988006" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
@@ -395,18 +429,18 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/Solicitacoes.java</url>
-          <line>97</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/SalasAbertasForm.java</url>
+          <line>36</line>
           <properties />
-          <option name="timeStamp" value="13" />
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="udpc.getStrRetorno().substring(j, j + 4)" language="JAVA" />
-        <watch expression="udpc.getStrRetorno().substring(109 + i * 114, 114 + i * 114)" language="JAVA" />
+        <watch expression="udpc.getStrRetorno().substring(j, j + 3)" language="JAVA" />
+        <watch expression="udpc.getStrRetorno()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -435,39 +469,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/jdk/jdk1.8.0_144/src.zip!/java/lang/NumberFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/jdk/jdk1.8.0_144/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="614" column="0" lean-forward="false" selection-start-line="614" selection-start-column="0" selection-end-line="614" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/UDPCliente.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+        <state relative-caret-position="462">
+          <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
           <folding>
-            <element signature="e#6414#6415#0" expanded="true" />
+            <element signature="e#6374#6375#0" expanded="true" />
+            <element signature="e#6407#6408#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/JanelaPrincipalForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/view/SalasAbertasForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75">
-          <caret line="33" column="93" lean-forward="false" selection-start-line="33" selection-start-column="93" selection-end-line="33" selection-end-column="93" />
+        <state relative-caret-position="285">
+          <caret line="36" column="73" lean-forward="true" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
           <folding>
-            <element signature="e#3666#3667#0" expanded="true" />
-            <element signature="e#3727#3728#0" expanded="true" />
-            <marker date="1512013945788" expanded="false" signature="6814:6825" ph=" { " />
-            <marker date="1512013945788" expanded="false" signature="6838:6844" ph=" }" />
-            <marker date="1512013945788" expanded="false" signature="6951:6962" ph=" { " />
-            <marker date="1512013945788" expanded="false" signature="6981:6987" ph=" }" />
-            <marker date="1512013945788" expanded="false" signature="7076:7087" ph=" { " />
-            <marker date="1512013945788" expanded="false" signature="7110:7116" ph=" }" />
-            <marker date="1512013945788" expanded="false" signature="7247:7258" ph=" { " />
-            <marker date="1512013945788" expanded="false" signature="7297:7303" ph=" }" />
+            <element signature="e#3712#3713#0" expanded="true" />
+            <element signature="e#3773#3774#0" expanded="true" />
+            <marker date="1512047145533" expanded="false" signature="1460:1490" ph="/unchecked/" />
+            <marker date="1512047145533" expanded="false" signature="1495:5531" ph="Generated Code" />
+            <marker date="1512047145533" expanded="false" signature="6860:6871" ph=" { " />
+            <marker date="1512047145533" expanded="false" signature="6884:6890" ph=" }" />
+            <marker date="1512047145533" expanded="false" signature="6997:7008" ph=" { " />
+            <marker date="1512047145533" expanded="false" signature="7027:7033" ph=" }" />
+            <marker date="1512047145533" expanded="false" signature="7122:7133" ph=" { " />
+            <marker date="1512047145533" expanded="false" signature="7156:7162" ph=" }" />
+            <marker date="1512047145533" expanded="false" signature="7293:7304" ph=" { " />
+            <marker date="1512047145533" expanded="false" signature="7343:7349" ph=" }" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mjasistemas/chatclientudp/comunicacao/Solicitacoes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state relative-caret-position="87">
+          <caret line="98" column="40" lean-forward="true" selection-start-line="98" selection-start-column="40" selection-end-line="98" selection-end-column="40" />
           <folding />
         </state>
       </provider>
