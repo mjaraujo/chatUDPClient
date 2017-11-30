@@ -79,6 +79,7 @@ public class Solicitacoes {
     }
 
     public List<Sala> solicitarSalasAberas(String username) {
+        List<Sala> lstSalas = new ArrayList<>();
         String msg = "01";
         msg += String.format("%12s", username);
 
@@ -87,34 +88,33 @@ public class Solicitacoes {
 
         do {
             if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
-
+                int j = 4;
+                udpc.setStrRetorno(udpc.getStrRetorno() + " ");
                 switch (udpc.getRetornoSolicitacao()) {
                     case LISTAR_SALAS_OK: //login sucesso
-                        Integer.parseInt(udpc.getStrRetorno().substring(3, 4));
-                        String usuario = udpc.getStrRetorno().substring(7, 18).trim();
-                        int tipo = Integer.parseInt(udpc.getStrRetorno().substring(19, 19));
-                        switch (tipo) {
-                            case 0:
-                                break;
-                            case 1:
-                                break;
-                            case 2:
-                                break;
+                        int numSalas = Integer.parseInt(udpc.getStrRetorno().substring(2, 4));
+                        for (int i = 0; i < numSalas; i++) {
+                            Sala s = new Sala();
+                            int id = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 5).trim());
+                            j += 5;
+                            s.setId(id);
+                            String nome = udpc.getStrRetorno().substring(j, j + 100).trim();
+                            j += 100;
+                            s.setNome(nome);
+                            int capacidade = Integer.parseInt(udpc.getStrRetorno().substring(j, j + 5).trim());
+                            j += 5;
+                            s.setId(capacidade);
+                            lstSalas.add(s);
                         }
                         break;
-                    case LOGIN_ERRO_RG:
-
-                        break;
-                    case LOGIN_ERRO_SENHA:
-
-                        break;
                 }
-
+                return lstSalas;
             }
+
 
         } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
 
-        return new ArrayList<>();
+        return lstSalas;
 
     }
 

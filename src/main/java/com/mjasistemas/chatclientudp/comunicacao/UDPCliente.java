@@ -127,7 +127,7 @@ public class UDPCliente implements Runnable {
 
     private void escutar() {
 
-        byte[] buffer = new byte[255];
+        byte[] buffer = new byte[5046];
         while (true) {
             DatagramPacket resposta = new DatagramPacket(buffer, buffer.length);
             try {
