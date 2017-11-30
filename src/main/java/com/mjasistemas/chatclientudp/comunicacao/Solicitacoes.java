@@ -25,8 +25,7 @@ public class Solicitacoes {
     UDPCliente udpc;
 
     public Solicitacoes() {
-        udpc = new UDPCliente(Configuracoes.getIP(), Configuracoes.getPorta());
-        udpc.run();
+        udpc = UDPCliente.getInstance();
     }
 
     public Pessoa solicitarLogin(String username, String senha) {
@@ -35,7 +34,7 @@ public class Solicitacoes {
         msg += String.format("%20s", senha);
 
         udpc.enviar(msg);
-
+        udpc.run();
         Pessoa p = null;
         do {
             if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {

@@ -7,6 +7,7 @@ package com.mjasistemas.chatclientudp.comunicacao;
 
 import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.StatusSolicitacaoEnum;
+
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
@@ -21,10 +22,21 @@ public class UDPCliente implements Runnable {
     private final int servidorPorta;
     private String strRetorno;
     private DatagramSocket aSoquete;
+    private static UDPCliente instance;
 
-    public UDPCliente(String ip, int servidorPorta) {
-        this.ip = ip;
-        this.servidorPorta = servidorPorta;
+
+    public static synchronized UDPCliente getInstance() {
+        if (instance == null) {
+            instance = new UDPCliente();
+        }
+        return instance;
+
+
+    }
+
+    private UDPCliente() {
+        this.ip = Configuracoes.getIP();
+        this.servidorPorta = Configuracoes.getPorta();
         try {
             aSoquete = new DatagramSocket();
         } catch (SocketException ex) {
@@ -57,7 +69,7 @@ public class UDPCliente implements Runnable {
         String ret;
         switch (sResp) {
             case "00": //resposta solicitação login no sistema
-                 ret = resp.substring(2, 3); // pega a ultima posição para fazer a verificação conforme protocolo
+                ret = resp.substring(2, 3); // pega a ultima posição para fazer a verificação conforme protocolo
                 strRetorno = resp;
                 switch (ret) {
                     case "0":
@@ -119,6 +131,11 @@ public class UDPCliente implements Runnable {
         while (true) {
             DatagramPacket resposta = new DatagramPacket(buffer, buffer.length);
             try {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 escutando = true;
                 aSoquete.receive(resposta);
                 String resp = new String(resposta.getData()).trim();
@@ -129,6 +146,10 @@ public class UDPCliente implements Runnable {
                 }
             } catch (IOException ex) {
                 Logger.getLogger(UDPCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (aSoquete != null) {
+                    // aSoquete.close();
+                }
             }
 
         }
@@ -136,9 +157,9 @@ public class UDPCliente implements Runnable {
 
     @Override
     public void run() {
-        if (!escutando) {
-            escutar();
-        }
+
+        escutar();
+
     }
 
     /**
