@@ -10,7 +10,7 @@ package com.mjasistemas.chatclientudp.model;
  * @author marcio
  */
 public enum RetornoEnum {
-
+// vc tá me ouvindo? ué 
     ENTRADA_OK("Entrada permitida"),
     ENTRADA_BANIDO("Usuário banido da sala"),
     ENTRADA_NAO_CADASTRADO("Usuário não cadastrado"),

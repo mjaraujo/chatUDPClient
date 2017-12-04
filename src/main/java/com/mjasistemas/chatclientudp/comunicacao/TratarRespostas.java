@@ -11,4 +11,9 @@ package com.mjasistemas.chatclientudp.comunicacao;
  */
 public class TratarRespostas {
     
+    
+    
+    
+    
+    
 }

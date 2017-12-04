@@ -183,6 +183,14 @@ public class ChatForm extends javax.swing.JFrame{
     public void setPessoas(ObservableList<Pessoa> pessoas) {
         this.pessoas = pessoas;
     }
+    
+    
+   private void manterChatCliente(){
+       
+       
+       
+       
+   }
 
     private void atualizarLista() {
         do {
@@ -204,6 +212,14 @@ public class ChatForm extends javax.swing.JFrame{
             }
         };
         queryThread.start();
+    }
+    private void manterChat(){
+        Thread queryThreadChat = new Thread() {
+            public void run() {
+                manterChatCliente();
+            }
+        };
+        queryThreadChat.start();
     }
 
 }
