@@ -32,6 +32,8 @@ public class Mensagem implements Serializable {
     private Integer id;
     private int destinatario;
     private int remetente;
+    private String destinatarioString;
+    private String remetenteString;
     private String conteudo;
     private Date timestamp;
     private Sessao sessao;
@@ -75,6 +77,22 @@ public class Mensagem implements Serializable {
         this.remetente = remetente;
     }
 
+    public String getDestinatarioString() {
+        return destinatarioString;
+    }
+
+    public void setDestinatarioString(String destinatario) {
+        this.destinatarioString = destinatarioString;
+    }
+
+    public String getRemetenteString() {
+        return remetenteString;
+    }
+
+    public void setRemetenteString(String remetente) {
+        this.remetenteString = remetenteString;
+    }
+
     public String getConteudo() {
         return conteudo;
     }
@@ -103,5 +121,5 @@ public class Mensagem implements Serializable {
     public String toString() {
         return "com.mjasistemas.chatclientudp.model.Mensagem[ id=" + id + " ]";
     }
-    
+
 }

@@ -13,6 +13,8 @@ import java.util.Date;
  *
  * @author marcio
  */
+//mesnsafgem pertence a sala
+
 public class Sessao implements Serializable {
 
     private static final long serialVersionUID = 1L;

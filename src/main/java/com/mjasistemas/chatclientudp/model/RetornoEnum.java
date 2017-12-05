@@ -22,7 +22,9 @@ public enum RetornoEnum {
     MENSAGEM_FALHA("Erro ao enviar mensagem"),
     MENSAGEM_TIMEOUT("Tempo de envio de mensagem excedido"),
     MENSAGEM_DESTINATARIO_INEXISTENTE("Destinatário inexistente"),
-    LISTAR_SALAS_OK("Salas listadas com sucesso");
+    LISTAR_SALAS_OK("Salas listadas com sucesso"),
+    MENSAGEM_SEM_PERMISSAO("Sem permissão para enviar mensagem"),
+    MENSAGEM_SEM_SALA("Sala Indisponível");
     
     private final String descricao;
 

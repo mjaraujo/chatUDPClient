@@ -5,6 +5,7 @@
  */
 package com.mjasistemas.chatclientudp.comunicacao;
 
+import com.mjasistemas.chatclientudp.model.Mensagem;
 import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.Sala;
 import com.mjasistemas.chatclientudp.model.StatusSolicitacaoEnum;
@@ -13,8 +14,13 @@ import com.mjasistemas.chatclientudp.model.pessoa.Moderador;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
 import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -99,6 +105,55 @@ public class Solicitacoes {
         } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
 
         return RetornoEnum.MENSAGEM_TIMEOUT;
+
+    }
+
+    public List<Mensagem> solicitarNovasMensagem(int sala, Timestamp ultimaMensgemRecebida) throws ParseException {
+        String msg = "05";
+        List<Mensagem> lstMesagens = new ArrayList<>();
+
+        msg += String.format("%05d", sala); //numero %d, string %s
+        msg += String.format("%22s", ultimaMensgemRecebida);
+
+        udpc.enviar(msg);
+        udpc.run();
+
+        do {
+            if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
+
+                int j = 5;
+                switch (udpc.getRetornoSolicitacao()) {
+                    case MENSAGEM_OK: //mesnsagem sucesso
+                        int numMensagens = Integer.parseInt(udpc.getStrRetorno().substring(3, 5)); //pega a qtd de mensagens que tem no serv
+                        for (int i = 0; i < numMensagens - 1; i++) {
+                            
+                            Mensagem men = new Mensagem();
+                            DateFormat format = new SimpleDateFormat("DD/MM/YYYY"); // ver como esta no BD
+                            
+                            Date time1 = (Date)format.parse(udpc.getStrRetorno().substring(j, j + 22).trim());
+                            j += 22;
+                            men.setTimestamp(time1);
+                            String remetenteString = (udpc.getStrRetorno().substring(j, j + 12).trim());
+                            j += 12;
+                            men.setRemetenteString(remetenteString);
+                            String destinatarioString = (udpc.getStrRetorno().substring(j, j + 12).trim()); //ver como esta no servidor tipo
+                            j += 12;
+                            men.setDestinatarioString(destinatarioString);
+                            
+                            String mesagemRecebida = udpc.getStrRetorno().substring(j, j+200).trim();
+                            j += 200;
+                            men.setConteudo(mesagemRecebida);
+                            
+                            lstMesagens.add(men); // faz o recebimento da mensagem o copula em uma lista de mensagem
+                        }
+                        break;
+                }
+                     return lstMesagens;
+            }
+
+        } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
+
+        return lstMesagens;
 
     }
 

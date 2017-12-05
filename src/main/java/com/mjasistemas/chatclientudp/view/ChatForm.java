@@ -6,13 +6,16 @@
 package com.mjasistemas.chatclientudp.view;
 
 import com.mjasistemas.chatclientudp.comunicacao.Solicitacoes;
+import com.mjasistemas.chatclientudp.model.Mensagem;
 import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.Sala;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
 import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
+import java.security.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javafx.collections.transformation.SortedList;
 
@@ -28,17 +31,21 @@ import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
 public class ChatForm extends javax.swing.JFrame {
 
     private ObservableList<Pessoa> pessoas;
+    private ObservableList<Mensagem> mesnsagems;
     private Sala sala;
     private Pessoa pessoa;
+    private Mensagem mensagem;
     private Pessoa pessoaSelecionada;
 
     /**
      * Creates new form ChatForm
      */
-    public ChatForm(Sala sala, Pessoa pessoa) {
+    public ChatForm(Sala sala, Pessoa pessoa, Mensagem mensagem) {
         this.sala = sala;
         this.pessoa = pessoa;
+        this.mensagem = mensagem;
         this.pessoas = ObservableCollections.observableList(new ArrayList<>());
+        this.mesnsagems = ObservableCollections.observableList(new ArrayList<>());
         initComponents();
         iniciar();
     }
@@ -212,14 +219,31 @@ public class ChatForm extends javax.swing.JFrame {
         this.pessoas = pessoas;
     }
 
-    private void manterChatCliente() {
-
+    public ObservableList<Mensagem> getMesnsagems() {
+        return mesnsagems;
     }
+
+    public void setMesnsagems(ObservableList<Mensagem> mesnsagems) {
+        this.mesnsagems = mesnsagems;
+    }
+
+    public Mensagem getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(Mensagem mensagem) {
+        this.mensagem = mensagem;
+    }
+    
+    
 
     private void atualizarLista() {
         do {
             pessoas.clear();
             pessoas.addAll(new Solicitacoes().solicitarLogadosSala(this.pessoa.getNickName(), sala.getId()));
+           // mesnsagems.addAll(new Solicitacoes().solicitarNovasMensagem(sala.getId(),  ));// falta manda a timestamp da ultima mensagem e formatar e colocar no txty boc
+            
+            
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -238,14 +262,7 @@ public class ChatForm extends javax.swing.JFrame {
         queryThread.start();
     }
 
-    private void manterChat() {
-        Thread queryThreadChat = new Thread() {
-            public void run() {
-                manterChatCliente();
-            }
-        };
-        queryThreadChat.start();
-    }
+   
 
     /**
      * @return the pessoaSelecionada
