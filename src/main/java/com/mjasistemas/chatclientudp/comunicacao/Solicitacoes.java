@@ -78,6 +78,30 @@ public class Solicitacoes {
 
     }
 
+    public RetornoEnum solicitarEnvioMensagem(String fromUser, String toUser, int sala, String mensgem) {
+        String msg = "04";
+
+        msg += String.format("%05d", sala); //numero %d, string %s
+        msg += String.format("%12s", fromUser); //numero %d, string %s
+        msg += String.format("%12s", toUser);
+        msg += String.format("%200s", mensgem); //numero %d, string %s
+
+        udpc.enviar(msg);
+        udpc.run();
+
+        do {
+            if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
+
+                return udpc.getRetornoSolicitacao();
+
+            }
+
+        } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
+
+        return RetornoEnum.MENSAGEM_TIMEOUT;
+
+    }
+
     public List<Sala> solicitarSalasAberas(String username) {
         List<Sala> lstSalas = new ArrayList<>();
         String msg = "01";
@@ -109,7 +133,6 @@ public class Solicitacoes {
                 }
                 return lstSalas;
             }
-
 
         } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
 

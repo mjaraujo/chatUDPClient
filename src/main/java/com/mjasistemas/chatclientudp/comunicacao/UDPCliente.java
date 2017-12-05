@@ -24,13 +24,11 @@ public class UDPCliente implements Runnable {
     private DatagramSocket aSoquete;
     private static UDPCliente instance;
 
-
     public static synchronized UDPCliente getInstance() {
         if (instance == null) {
             instance = new UDPCliente();
         }
         return instance;
-
 
     }
 
@@ -128,18 +126,18 @@ public class UDPCliente implements Runnable {
                         break;
                 }
                 break;
-                case "04": //resposta solicitação de mensagem
+            case "04": //resposta solicitação de mensagem
                 ret = resp.substring(2, 3);
                 strRetorno = resp;
                 switch (ret) {
                     case "0":
-                        retornoSolicitacao = RetornoEnum.;
+                        retornoSolicitacao = RetornoEnum.MENSAGEM_OK;
                         break;
                     case "1":
-                        retornoSolicitacao = RetornoEnum.ENTRADA_NAO_CADASTRADO;
+                        retornoSolicitacao = RetornoEnum.MENSAGEM_FALHA;
                         break;
                     case "2":
-                        retornoSolicitacao = RetornoEnum.ENTRADA_BANIDO;
+                        retornoSolicitacao = RetornoEnum.MENSAGEM_DESTINATARIO_INEXISTENTE;
                         break;
                 }
                 break;

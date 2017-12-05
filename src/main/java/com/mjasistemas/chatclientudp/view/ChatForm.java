@@ -6,6 +6,7 @@
 package com.mjasistemas.chatclientudp.view;
 
 import com.mjasistemas.chatclientudp.comunicacao.Solicitacoes;
+import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.Sala;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
 import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
@@ -14,6 +15,9 @@ import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
 import java.util.ArrayList;
 
 import javafx.collections.transformation.SortedList;
+
+import javax.swing.JOptionPane;
+
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
@@ -21,10 +25,12 @@ import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
 /**
  * @author marcio
  */
-public class ChatForm extends javax.swing.JFrame{
+public class ChatForm extends javax.swing.JFrame {
+
     private ObservableList<Pessoa> pessoas;
     private Sala sala;
     private Pessoa pessoa;
+    private Pessoa pessoaSelecionada;
 
     /**
      * Creates new form ChatForm
@@ -36,7 +42,6 @@ public class ChatForm extends javax.swing.JFrame{
         initComponents();
         iniciar();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,6 +97,9 @@ public class ChatForm extends javax.swing.JFrame{
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${pessoaSelecionada}"), tblUsuarios, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
+        bindingGroup.addBinding(binding);
+
         jScrollPane3.setViewportView(tblUsuarios);
 
         jtMensagem.setColumns(20);
@@ -99,6 +107,11 @@ public class ChatForm extends javax.swing.JFrame{
         jScrollPane4.setViewportView(jtMensagem);
 
         btEnviar.setText("Enviar");
+        btEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEnviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +167,21 @@ public class ChatForm extends javax.swing.JFrame{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+
+        if (jtMensagem.getText() != null && pessoaSelecionada != null) {
+            RetornoEnum resSolicitarMensagem;
+            do {
+
+                resSolicitarMensagem = new Solicitacoes().solicitarEnvioMensagem(pessoa.getNickName(),
+                        pessoaSelecionada.getNickName(), sala.getId(), jtMensagem.getText());
+
+            } while (resSolicitarMensagem == RetornoEnum.ERRO_SIZE);
+        }
+    }//GEN-LAST:event_btEnviarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEnviar;
@@ -183,14 +211,10 @@ public class ChatForm extends javax.swing.JFrame{
     public void setPessoas(ObservableList<Pessoa> pessoas) {
         this.pessoas = pessoas;
     }
-    
-    
-   private void manterChatCliente(){
-       
-       
-       
-       
-   }
+
+    private void manterChatCliente() {
+
+    }
 
     private void atualizarLista() {
         do {
@@ -205,7 +229,7 @@ public class ChatForm extends javax.swing.JFrame{
 
     }
 
-    private void iniciar(){
+    private void iniciar() {
         Thread queryThread = new Thread() {
             public void run() {
                 atualizarLista();
@@ -213,13 +237,28 @@ public class ChatForm extends javax.swing.JFrame{
         };
         queryThread.start();
     }
-    private void manterChat(){
+
+    private void manterChat() {
         Thread queryThreadChat = new Thread() {
             public void run() {
                 manterChatCliente();
             }
         };
         queryThreadChat.start();
+    }
+
+    /**
+     * @return the pessoaSelecionada
+     */
+    public Pessoa getPessoaSelecionada() {
+        return pessoaSelecionada;
+    }
+
+    /**
+     * @param pessoaSelecionada the pessoaSelecionada to set
+     */
+    public void setPessoaSelecionada(Pessoa pessoaSelecionada) {
+        this.pessoaSelecionada = pessoaSelecionada;
     }
 
 }

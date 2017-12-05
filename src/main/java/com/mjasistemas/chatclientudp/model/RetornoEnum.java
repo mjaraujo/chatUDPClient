@@ -18,6 +18,10 @@ public enum RetornoEnum {
     LOGIN_ERRO_RG("Usuario não registrado"),
     LOGIN_ERRO_SENHA("Senha inválida"),
     LOGIN_OK("Login com sucesso"),
+    MENSAGEM_OK("Mensagem enviada com sucesso"),
+    MENSAGEM_FALHA("Erro ao enviar mensagem"),
+    MENSAGEM_TIMEOUT("Tempo de envio de mensagem excedido"),
+    MENSAGEM_DESTINATARIO_INEXISTENTE("Destinatário inexistente"),
     LISTAR_SALAS_OK("Salas listadas com sucesso");
     
     private final String descricao;
