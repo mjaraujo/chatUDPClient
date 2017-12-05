@@ -13,9 +13,14 @@ import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
 import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
 import java.security.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.transformation.SortedList;
 
@@ -187,6 +192,7 @@ public class ChatForm extends javax.swing.JFrame {
 
             } while (resSolicitarMensagem == RetornoEnum.ERRO_SIZE);
         }
+        jtMensagem.setText("");
     }//GEN-LAST:event_btEnviarActionPerformed
 
 
@@ -237,10 +243,20 @@ public class ChatForm extends javax.swing.JFrame {
     
     
 
-    private void atualizarLista() {
+    private void atualizarLista() throws ParseException {
         do {
             pessoas.clear();
             pessoas.addAll(new Solicitacoes().solicitarLogadosSala(this.pessoa.getNickName(), sala.getId()));
+            
+      
+            if(mensagem.getTimestamp() == null){
+                SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss.SSS" );
+                Date a = new Date();
+                a.getTime();
+                String dataFormatada = format.format(a)+ "." + System.currentTimeMillis()%1000;//converte para dete de um jeito muito loco
+                a = format.parse(dataFormatada);
+                mensagem.setTimestamp(a);
+            } 
            // mesnsagems.addAll(new Solicitacoes().solicitarNovasMensagem(sala.getId(),  ));// falta manda a timestamp da ultima mensagem e formatar e colocar no txty boc
             
             
@@ -256,7 +272,11 @@ public class ChatForm extends javax.swing.JFrame {
     private void iniciar() {
         Thread queryThread = new Thread() {
             public void run() {
-                atualizarLista();
+                try {
+                    atualizarLista();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ChatForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         queryThread.start();
