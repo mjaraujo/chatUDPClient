@@ -7,6 +7,7 @@ package com.mjasistemas.chatclientudp.view;
 
 import com.mjasistemas.chatclientudp.comunicacao.Solicitacoes;
 import com.mjasistemas.chatclientudp.comunicacao.UDPCliente;
+import com.mjasistemas.chatclientudp.model.Mensagem;
 import com.mjasistemas.chatclientudp.model.RetornoEnum;
 import com.mjasistemas.chatclientudp.model.Sala;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
@@ -17,6 +18,7 @@ import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author marcio
@@ -129,7 +131,8 @@ public class SalasAbertasForm extends javax.swing.JInternalFrame {
             resSolicitarEntrada = new Solicitacoes().solicitarEntrada(pessoa.getNickName(), salaSelecionada.getId());
 
             if (resSolicitarEntrada == RetornoEnum.ENTRADA_OK) {
-                new ChatForm(salaSelecionada,pessoa, null).setVisible(true);
+                List<Mensagem> lstMensagem = new ArrayList<>();
+                new ChatForm(salaSelecionada,pessoa, new Mensagem(), lstMensagem).setVisible(true);
             } else if (resSolicitarEntrada == RetornoEnum.ENTRADA_BANIDO) {
                 JOptionPane.showMessageDialog(this, "Você está banido dessa sala");
 

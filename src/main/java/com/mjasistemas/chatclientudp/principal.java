@@ -18,11 +18,9 @@ import com.mjasistemas.chatclientudp.view.LoginForm;
 public class principal {
     public static void main(String[] args)  {
       //  2017-12-05 13:43:44
-        
-        
-       
+      
         Configuracoes.setPorta(9876);
-        Configuracoes.setIP("127.0.0.1");
+        Configuracoes.setIP("10.0.54.11");
         new LoginForm().setVisible(true);
     }
 }

@@ -108,7 +108,7 @@ public class Solicitacoes {
 
     }
 
-    public List<Mensagem> solicitarNovasMensagem(int sala, Timestamp ultimaMensgemRecebida) throws ParseException {
+    public List<Mensagem> solicitarNovasMensagem(int sala, Date ultimaMensgemRecebida) throws ParseException {
         String msg = "05";
         List<Mensagem> lstMesagens = new ArrayList<>();
 
@@ -126,11 +126,13 @@ public class Solicitacoes {
                     case MENSAGEM_OK: //mesnsagem sucesso
                         int numMensagens = Integer.parseInt(udpc.getStrRetorno().substring(3, 5)); //pega a qtd de mensagens que tem no serv
                         for (int i = 0; i < numMensagens - 1; i++) {
-                            
+
                             Mensagem men = new Mensagem();
-                            DateFormat format = new SimpleDateFormat("DD/MM/YYYY"); // ver como esta no BD
-                            
-                            Date time1 = (Date)format.parse(udpc.getStrRetorno().substring(j, j + 22).trim());
+                               //hora formatada
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                            //hora formatada
+
+                            Date time1 = (Date) format.parse(udpc.getStrRetorno().substring(j, j + 22).trim());
                             j += 22;
                             men.setTimestamp(time1);
                             String remetenteString = (udpc.getStrRetorno().substring(j, j + 12).trim());
@@ -139,16 +141,16 @@ public class Solicitacoes {
                             String destinatarioString = (udpc.getStrRetorno().substring(j, j + 12).trim()); //ver como esta no servidor tipo
                             j += 12;
                             men.setDestinatarioString(destinatarioString);
-                            
-                            String mesagemRecebida = udpc.getStrRetorno().substring(j, j+200).trim();
+
+                            String mesagemRecebida = udpc.getStrRetorno().substring(j, j + 200).trim();
                             j += 200;
                             men.setConteudo(mesagemRecebida);
-                            
+
                             lstMesagens.add(men); // faz o recebimento da mensagem o copula em uma lista de mensagem
                         }
                         break;
                 }
-                     return lstMesagens;
+                return lstMesagens;
             }
 
         } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
