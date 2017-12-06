@@ -108,7 +108,7 @@ public class Solicitacoes {
 
     }
 
-    public List<Mensagem> solicitarNovasMensagem(int sala, Date ultimaMensgemRecebida) throws ParseException {
+    public List<Mensagem> solicitarNovasMensagem(int sala, String ultimaMensgemRecebida) throws ParseException {
         String msg = "05";
         List<Mensagem> lstMesagens = new ArrayList<>();
 

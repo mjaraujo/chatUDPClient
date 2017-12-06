@@ -35,14 +35,14 @@ import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
  * @author marcio
  */
 public class ChatForm extends javax.swing.JFrame {
-
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
     private ObservableList<Pessoa> pessoas;
     List<Mensagem> lstMesagens = new ArrayList<>();
     private Sala sala;
     private Pessoa pessoa;
     private Mensagem mensagem;
     private Pessoa pessoaSelecionada;
-
+    private String lastTimestamp;
     /**
      * Creates new form ChatForm
      */
@@ -54,6 +54,7 @@ public class ChatForm extends javax.swing.JFrame {
         this.lstMesagens = lstMesagens;//ObservableCollections.observableList(new ArrayList<>());// esta dando erro na vinculação
         initComponents();
         iniciar();
+        lastTimestamp = dateFormat.format(new Date());
     }
 
     /**
@@ -257,7 +258,7 @@ public class ChatForm extends javax.swing.JFrame {
                 a = format.parse(dataFormatada);
                 mensagem.setTimestamp(a);
             } 
-            lstMesagens.addAll(new Solicitacoes().solicitarNovasMensagem(sala.getId(), mensagem.getTimestamp()));// falta manda a timestamp da ultima mensagem e formatar e colocar no txty boc
+            lstMesagens.addAll(new Solicitacoes().solicitarNovasMensagem(sala.getId(), lastTimestamp));// falta manda a timestamp da ultima mensagem e formatar e colocar no txty boc
             for(Mensagem mensagemFor : lstMesagens){
                 jTextArea1.setText("Enviada as:" + mensagemFor.getTimestamp()+ " " 
                         + mensagemFor.getConteudo() + "Pelo usuario: " + mensagemFor.getRemetenteString());
