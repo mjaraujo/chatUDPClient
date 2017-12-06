@@ -35,8 +35,23 @@ import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
  * @author marcio
  */
 public class ChatForm extends javax.swing.JFrame {
+
+    /**
+     * @return the mensagensRecebidas
+     */
+    public ObservableList<Mensagem> getMensagensRecebidas() {
+        return mensagensRecebidas;
+    }
+
+    /**
+     * @param mensagensRecebidas the mensagensRecebidas to set
+     */
+    public void setMensagensRecebidas(ObservableList<Mensagem> mensagensRecebidas) {
+        this.mensagensRecebidas = mensagensRecebidas;
+    }
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
     private ObservableList<Pessoa> pessoas;
+    private ObservableList<Mensagem> mensagensRecebidas;
     List<Mensagem> lstMesagens = new ArrayList<>();
     private Sala sala;
     private Pessoa pessoa;
@@ -51,7 +66,8 @@ public class ChatForm extends javax.swing.JFrame {
         this.pessoa = pessoa;
         this.mensagem = mensagem;
         this.pessoas = ObservableCollections.observableList(new ArrayList<>());
-        this.lstMesagens = lstMesagens;//ObservableCollections.observableList(new ArrayList<>());// esta dando erro na vinculação
+        this.mensagensRecebidas = ObservableCollections.observableList(new ArrayList<>());
+       // this.lstMesagens = lstMesagens;//ObservableCollections.observableList(new ArrayList<>());// esta dando erro na vinculação
         initComponents();
         iniciar();
         lastTimestamp = dateFormat.format(new Date());
@@ -67,8 +83,6 @@ public class ChatForm extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -78,13 +92,12 @@ public class ChatForm extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jtMensagem = new javax.swing.JTextArea();
         btEnviar = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbMensagem = new javax.swing.JTable();
+        cbPessoas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setText("Sala:");
 
@@ -126,30 +139,68 @@ public class ChatForm extends javax.swing.JFrame {
             }
         });
 
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${mensagensRecebidas}");
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, tbMensagem);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${remetenteString}"));
+        columnBinding.setColumnName("Remetente String");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${conteudo}"));
+        columnBinding.setColumnName("Conteudo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${destinatarioString}"));
+        columnBinding.setColumnName("Destinatario String");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${timestamp}"));
+        columnBinding.setColumnName("Timestamp");
+        columnBinding.setColumnClass(java.util.Date.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane5.setViewportView(tbMensagem);
+
+        cbPessoas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${pessoas}");
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, cbPessoas);
+        bindingGroup.addBinding(jComboBoxBinding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${pessoaSelecionada}"), cbPessoas, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+
+        cbPessoas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPessoasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btEnviar))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btEnviar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 10, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbPessoas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -163,11 +214,13 @@ public class ChatForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btEnviar))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -196,17 +249,22 @@ public class ChatForm extends javax.swing.JFrame {
         jtMensagem.setText("");
     }//GEN-LAST:event_btEnviarActionPerformed
 
+    private void cbPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPessoasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPessoasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEnviar;
+    private javax.swing.JComboBox<String> cbPessoas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jtMensagem;
+    private javax.swing.JTable tbMensagem;
     private javax.swing.JTable tblSalas;
     private javax.swing.JTable tblUsuarios;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
@@ -249,20 +307,26 @@ public class ChatForm extends javax.swing.JFrame {
             pessoas.clear();
             pessoas.addAll(new Solicitacoes().solicitarLogadosSala(this.pessoa.getNickName(), sala.getId()));
             
-            
+            /*
             if(mensagem.getTimestamp() != null){
                 SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss.SSS" );
                 Date a = new Date();
-                a.getTime();
+                a.getTime();                    //seta o time stamp de mesnsagem
                 String dataFormatada = format.format(a)+ "." + System.currentTimeMillis()%1000;//converte para dete de um jeito muito loco
                 a = format.parse(dataFormatada);
                 mensagem.setTimestamp(a);
             } 
-            lstMesagens.addAll(new Solicitacoes().solicitarNovasMensagem(sala.getId(), lastTimestamp));// falta manda a timestamp da ultima mensagem e formatar e colocar no txty boc
-            for(Mensagem mensagemFor : lstMesagens){
-                jTextArea1.setText("Enviada as:" + mensagemFor.getTimestamp()+ " " 
-                        + mensagemFor.getConteudo() + "Pelo usuario: " + mensagemFor.getRemetenteString());
+            */
+            
+            List<Mensagem> novasMensagens = new Solicitacoes().solicitarNovasMensagem(sala.getId(), lastTimestamp);
+            
+            if(novasMensagens.size() > 0){
+                 mensagensRecebidas.addAll(novasMensagens);
+                 lastTimestamp = novasMensagens.get(novasMensagens.size()-1).getTimestamp().toString();
+                 
             }
+           
+            
             
             try {
                 Thread.sleep(2000);

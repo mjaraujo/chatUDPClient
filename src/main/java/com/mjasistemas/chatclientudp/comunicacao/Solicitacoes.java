@@ -121,18 +121,21 @@ public class Solicitacoes {
         do {
             if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
 
-                int j = 5;
+                int j = 7;
                 switch (udpc.getRetornoSolicitacao()) {
                     case MENSAGEM_OK: //mesnsagem sucesso
-                        int numMensagens = Integer.parseInt(udpc.getStrRetorno().substring(3, 5)); //pega a qtd de mensagens que tem no serv
+                        int numMensagens = Integer.parseInt(udpc.getStrRetorno().substring(3, 6)); //pega a qtd de mensagens que tem no serv
                         for (int i = 0; i < numMensagens - 1; i++) {
 
                             Mensagem men = new Mensagem();
                                //hora formatada
                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                             //hora formatada
-
-                            Date time1 = (Date) format.parse(udpc.getStrRetorno().substring(j, j + 22).trim());
+                            Date time1 = new Date();
+                            time1 = format.parse(udpc.getStrRetorno().substring(j, j + 22).trim());
+                            men.setTimestamp(time1);
+                            //deu erro nao envia numeros
+                            System.out.println("Hora envia"+time1);
                             j += 22;
                             men.setTimestamp(time1);
                             String remetenteString = (udpc.getStrRetorno().substring(j, j + 12).trim());

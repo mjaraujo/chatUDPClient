@@ -30,8 +30,7 @@ public class Mensagem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-    private int destinatario;
-    private int remetente;
+   
     private String destinatarioString;
     private String remetenteString;
     private String conteudo;
@@ -45,10 +44,10 @@ public class Mensagem implements Serializable {
         this.id = id;
     }
 
-    public Mensagem(Integer id, int destinatario, int remetente, String conteudo, Date timestamp) {
+    public Mensagem(Integer id, String destinatario, String remetente, String conteudo, Date timestamp) {
         this.id = id;
-        this.destinatario = destinatario;
-        this.remetente = remetente;
+        this.destinatarioString = destinatario;
+        this.remetenteString = remetente;
         this.conteudo = conteudo;
         this.timestamp = timestamp;
     }
@@ -61,21 +60,9 @@ public class Mensagem implements Serializable {
         this.id = id;
     }
 
-    public int getDestinatario() {
-        return destinatario;
-    }
+    
 
-    public void setDestinatario(int destinatario) {
-        this.destinatario = destinatario;
-    }
-
-    public int getRemetente() {
-        return remetente;
-    }
-
-    public void setRemetente(int remetente) {
-        this.remetente = remetente;
-    }
+    
 
     public String getDestinatarioString() {
         return destinatarioString;
