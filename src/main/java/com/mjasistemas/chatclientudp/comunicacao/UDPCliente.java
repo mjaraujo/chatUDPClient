@@ -47,7 +47,7 @@ public class UDPCliente implements Runnable {
         try {
             statusSolicitacao = StatusSolicitacaoEnum.PROCESSANDO;
             strRetorno = "";
-            byte[] m = mensagem.getBytes();
+            byte[] m = mensagem.getBytes("UTF-8");
             InetAddress aHost = InetAddress.getByName(/*args[1]*/ip);
             DatagramPacket requisicao = new DatagramPacket(m, mensagem.length(), aHost, servidorPorta);
             aSoquete.send(requisicao);
