@@ -58,6 +58,11 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2.setText("Senha");
 
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnEntrar.setText("ENTRAR");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,12 +127,15 @@ public class LoginForm extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
 
         Pessoa pessoaLogin = new Solicitacoes().solicitarLogin(txtUsuario.getText(), txtSenha.getText());
-        
+        if(pessoaLogin==null){
+            JOptionPane.showMessageDialog(null , "Não foi possível conectar-se ao servidor");
+            return;
+        }
         
         switch (pessoaLogin.getId()) {
             case -1:
                 JOptionPane.showMessageDialog(this, "Usuario não cadastrado");
-                break;
+                return;
             case -2:
                 JOptionPane.showMessageDialog(this, "Senha inválida");
                 return;
@@ -137,6 +145,10 @@ public class LoginForm extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

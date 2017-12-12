@@ -20,7 +20,7 @@ public class principal {
       
       
         Configuracoes.setPorta(9876);
-        Configuracoes.setIP("10.0.54.11");
+        Configuracoes.setIP("127.0.0.1");
         new LoginForm().setVisible(true);
     }
 }

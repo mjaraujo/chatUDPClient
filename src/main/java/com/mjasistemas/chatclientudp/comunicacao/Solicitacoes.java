@@ -14,7 +14,9 @@ import com.mjasistemas.chatclientudp.model.pessoa.Moderador;
 import com.mjasistemas.chatclientudp.model.pessoa.Pessoa;
 import com.mjasistemas.chatclientudp.model.pessoa.TipoPessoaEnum;
 import com.mjasistemas.chatclientudp.model.pessoa.Usuario;
-import java.security.Timestamp;
+
+
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 
 /**
  * @author marcio
@@ -116,28 +119,26 @@ public class Solicitacoes {
         msg += String.format("%22s", ultimaMensgemRecebida);
 
         udpc.enviar(msg);
-        udpc.run();
 
+        udpc.run();
         do {
             if (udpc.getStatusSolicitacao() == StatusSolicitacaoEnum.RESPONDIDA) {
 
-                int j = 7;
+                int j = 6;
                 switch (udpc.getRetornoSolicitacao()) {
                     case MENSAGEM_OK: //mesnsagem sucesso
                         int numMensagens = Integer.parseInt(udpc.getStrRetorno().substring(3, 6)); //pega a qtd de mensagens que tem no serv
-                        for (int i = 0; i < numMensagens - 1; i++) {
+                        for (int i = 0; i < numMensagens; i++) {
 
                             Mensagem men = new Mensagem();
-                               //hora formatada
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                             //hora formatada
-                            Date time1 = new Date();
-                            time1 = format.parse(udpc.getStrRetorno().substring(j, j + 22).trim());
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                            //hora formatada
+                            Date time1 = format.parse(udpc.getStrRetorno().substring(j, j + 23).trim());
                             men.setTimestamp(time1);
                             //deu erro nao envia numeros
-                            System.out.println("Hora envia"+time1);
-                            j += 22;
-                            men.setTimestamp(time1);
+                            System.out.println("Hora envia" + time1);
+                            j += 23;
                             String remetenteString = (udpc.getStrRetorno().substring(j, j + 12).trim());
                             j += 12;
                             men.setRemetenteString(remetenteString);
@@ -216,6 +217,15 @@ public class Solicitacoes {
         } while (udpc.getStatusSolicitacao() != StatusSolicitacaoEnum.TIME_OUT);
 
         return RetornoEnum.ENTRADA_NAO_CADASTRADO;
+    }
+
+    public void enviarKeepAlive(String usuario, Integer sala) {
+        boolean ret = false;
+        String msg = "88";
+        msg += String.format("%12s", usuario);
+        msg += String.format("%05d", sala); //numeros estranhos complete do lado esquedo com mais coisas
+
+        udpc.enviar(msg);
     }
 
     public List<Pessoa> solicitarLogadosSala(String usuario, Integer sala) {

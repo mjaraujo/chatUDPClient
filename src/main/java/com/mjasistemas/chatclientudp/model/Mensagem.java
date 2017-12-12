@@ -6,6 +6,7 @@
 package com.mjasistemas.chatclientudp.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,8 +32,8 @@ public class Mensagem implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
    
-    private String destinatarioString;
-    private String remetenteString;
+    private String destinatario;
+    private String remetente;
     private String conteudo;
     private Date timestamp;
     private Sessao sessao;
@@ -44,10 +45,10 @@ public class Mensagem implements Serializable {
         this.id = id;
     }
 
-    public Mensagem(Integer id, String destinatario, String remetente, String conteudo, Date timestamp) {
+    public Mensagem(Integer id, String destinatario, String remetente, String conteudo, Timestamp timestamp) {
         this.id = id;
-        this.destinatarioString = destinatario;
-        this.remetenteString = remetente;
+        this.destinatario = destinatario;
+        this.remetente = remetente;
         this.conteudo = conteudo;
         this.timestamp = timestamp;
     }
@@ -65,19 +66,19 @@ public class Mensagem implements Serializable {
     
 
     public String getDestinatarioString() {
-        return destinatarioString;
+        return destinatario;
     }
 
     public void setDestinatarioString(String destinatario) {
-        this.destinatarioString = destinatarioString;
+        this.destinatario = destinatario;
     }
 
     public String getRemetenteString() {
-        return remetenteString;
+        return remetente;
     }
 
     public void setRemetenteString(String remetente) {
-        this.remetenteString = remetenteString;
+        this.remetente = remetente;
     }
 
     public String getConteudo() {

@@ -67,8 +67,8 @@ public class UDPCliente implements Runnable {
         String ret;
         switch (sResp) {
             case "00": //resposta solicitação login no sistema
-                ret = resp.substring(2, 3); // pega a ultima posição para fazer a verificação conforme protocolo
                 strRetorno = resp;
+                ret = resp.substring(2, 3); // pega
                 switch (ret) {
                     case "0":
                         retornoSolicitacao = RetornoEnum.LOGIN_OK;
@@ -179,6 +179,7 @@ public class UDPCliente implements Runnable {
                     e.printStackTrace();
                 }
                 escutando = true;
+                aSoquete.setSoTimeout(5000);
                 aSoquete.receive(resposta);
                 String resp = new String(resposta.getData());
                 System.out.println("Resposta ouvida pelo cliente: " + resp);
@@ -186,6 +187,9 @@ public class UDPCliente implements Runnable {
                 if (statusSolicitacao == StatusSolicitacaoEnum.RESPONDIDA) {
                     break;
                 }
+            } catch (SocketTimeoutException e){
+                statusSolicitacao = StatusSolicitacaoEnum.TIME_OUT;
+                return;
             } catch (IOException ex) {
                 Logger.getLogger(UDPCliente.class.getName()).log(Level.SEVERE, null, ex);
             } finally {

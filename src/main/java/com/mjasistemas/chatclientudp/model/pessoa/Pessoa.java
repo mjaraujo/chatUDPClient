@@ -85,7 +85,7 @@ public abstract class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mjasistemas.chatclientudp.model.Pessoa[ id=" + id + " ]";
+        return nickName;
     }
 
     /**
