@@ -281,7 +281,7 @@ public class ChatForm extends javax.swing.JFrame {
         this.mensagem = mensagem;
     }
 
-    private void atualizarLista() throws ParseException {
+    private synchronized void atualizarLista() throws ParseException {
         do {
             List<Pessoa> novaLista = new Solicitacoes().solicitarLogadosSala(this.pessoa.getNickName(), sala.getId());
 
