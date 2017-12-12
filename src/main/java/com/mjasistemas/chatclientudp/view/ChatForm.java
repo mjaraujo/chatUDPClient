@@ -281,7 +281,7 @@ public class ChatForm extends javax.swing.JFrame {
         this.mensagem = mensagem;
     }
 
-    private synchronized void atualizarLista() throws ParseException {
+    private void atualizarLista() throws ParseException {
         do {
             List<Pessoa> novaLista = new Solicitacoes().solicitarLogadosSala(this.pessoa.getNickName(), sala.getId());
 
@@ -292,15 +292,18 @@ public class ChatForm extends javax.swing.JFrame {
                     pessoas.add(p);
                 }
             }
-
+            List<Pessoa> pessoasRemover = new ArrayList<>();
             //remove usuários que saíram
             for (Pessoa p : pessoas) {
                 long count = novaLista.stream().filter(item -> item.getNickName().trim().equals(p.getNickName().trim())).count();
                 if (!p.getNickName().equals("todos") && count == 0) {
-                    pessoas.remove(p);
+                    pessoasRemover.add(p);
                 }
             }
-            
+            while (pessoasRemover.size() > 0) {
+                pessoas.remove(pessoasRemover.get(0));
+                pessoasRemover.remove(0);
+            }
 
             /*
             if(mensagem.getTimestamp() != null){
@@ -352,14 +355,14 @@ public class ChatForm extends javax.swing.JFrame {
     }
 
     private void enviarKeepAlive() {
-        do{
-            new Solicitacoes().enviarKeepAlive(pessoa.getNickName(),this.sala.getId());
+        do {
+            new Solicitacoes().enviarKeepAlive(pessoa.getNickName(), this.sala.getId());
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }while (true);
+        } while (true);
     }
 
     /**
